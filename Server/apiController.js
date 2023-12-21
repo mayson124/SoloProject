@@ -58,5 +58,5 @@ async function fetchDataFromAPI() {
 
 module.exports = {
   fetchDataFromAPI,
-  insertDataIntoTable, 
+  insertDataIntoTable
 };

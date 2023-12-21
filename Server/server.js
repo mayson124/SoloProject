@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const apiRouter = require('./apiRouter');
+const { fetchDataFromAPI } = require('./apiController');
 
 /**
  * handle parsing request body
@@ -17,11 +18,16 @@ app.use(express.static(path.resolve(__dirname, '../src')));
 
 app.use('/api', apiRouter);
 
-// Example: Fetch data from API (adjust based on your actual API fetching logic)
-const apiData = 'https://www.balldontlie.io/api/v1/stats';
-
-// Insert data into the PostgreSQL database
-insertDataIntoTable(apiData);
+// Example: Fetch data from API and insert it into the PostgreSQL database
+app.get('/fetchAndInsertData', async (req, res) => {
+  try {
+    await fetchDataFromAPI();
+    res.status(200).send('Data fetched and inserted successfully.');
+  } catch (error) {
+    console.error('Error in API route:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('You just got crossed over'));

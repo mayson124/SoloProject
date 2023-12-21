@@ -3,7 +3,7 @@ const router = express.Router();
 const { fetchDataFromAPI } = require('./apiController');
 
 // Define routes
-router.get('/fetchData', async (req, res) => {
+router.get('/fetchAndInsertData', async (req, res) => {
   try {
     await fetchDataFromAPI();
     res.status(200).send('Data fetched and inserted successfully.');
