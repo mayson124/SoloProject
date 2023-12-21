@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;
   return { 
-    log: `swapiController.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: 'swapiController.getMoreCharacterData: ERROR: Check server logs for details' }
+    log: `nbaapiController.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: 'nbaapiController.getMoreCharacterData: ERROR: Check server logs for details' }
   };
 };
 
