@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const apiRouter = require('./routes/api');
 const PORT = 3000;
+const apiRouter = require('./apiRouter');
 
 /**
  * handle parsing request body
@@ -15,10 +15,13 @@ app.use(express.urlencoded({ extended: true }));
  */
 app.use(express.static(path.resolve(__dirname, '../src')));
 
-/**
- * define route handlers
- */
 app.use('/api', apiRouter);
+
+// Example: Fetch data from API (adjust based on your actual API fetching logic)
+const apiData = 'https://www.balldontlie.io/api/v1/stats';
+
+// Insert data into the PostgreSQL database
+insertDataIntoTable(apiData);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('You just got crossed over'));

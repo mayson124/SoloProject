@@ -10,6 +10,23 @@ module.exports = {
         filename: 'bundle.js'
     },
 
+    devServer: {
+        host: 'localhost',
+        port: 8080,
+        // match the output path
+        static: {
+          directory: path.resolve(__dirname, 'dist'),
+          // match the output 'publicPath'
+          publicPath: '/',
+        },
+
+        proxy: {
+            '/api/**': {
+              target: 'http://localhost:3000/',
+              secure: false,
+            },
+          }
+    },
     plugins: [
         new HTMLWebpackPlugin({
             template: './src/index.html'
@@ -40,4 +57,4 @@ module.exports = {
         ]
     }
 
-}
+};
