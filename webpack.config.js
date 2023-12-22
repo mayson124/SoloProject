@@ -13,10 +13,8 @@ module.exports = {
     devServer: {
         host: 'localhost',
         port: 8080,
-        // match the output path
         static: {
           directory: path.resolve(__dirname, 'dist'),
-          // match the output 'publicPath'
           publicPath: '/',
         },
 

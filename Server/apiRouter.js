@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { fetchDataFromAPI } = require('./apiController');
 
-// Define routes
 router.get('/fetchAndInsertData', async (req, res) => {
   try {
     await fetchDataFromAPI();

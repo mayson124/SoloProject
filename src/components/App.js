@@ -13,6 +13,15 @@ const goatData = [
 ];
 
 const App = () => {
+
+  return (
+    <div>
+      <HomePage />
+    </div>
+  );
+};
+
+const HomePage = () => {
   const [currentPage, setCurrentPage] = useState('home');
 
   useEffect(() => {
@@ -34,7 +43,7 @@ const App = () => {
       )}
     </div>
   );
-};
+}
 
 const GoatBox = () => {
 
@@ -112,6 +121,7 @@ const StatsPage = () => {
           </ul>
         )}
       </div>
+      <button className="secret-button" onClick={() => window.location.href = 'https://www.si.com/.image/t_share/MjAyNTY3NzA2NTUyMDUwNzU2/jimmy-butler.jpg'}>PLEASE DON'T PUSH</button>
     </>
   )
 }

@@ -8,10 +8,10 @@ async function insertDataIntoTable(data) {
   try {
     await client.connect();
 
-    for (const item of data) {
-      if (!item || !item.player || !item.player.first_name || !item.player.last_name) {
+    for (const item of data.results) {
+      if (!item || !item.player_name) {
         console.error('Skipping invalid data:', item);
-        continue; // Skip invalid data
+        continue; 
       }
 
       const query = `
@@ -19,12 +19,12 @@ async function insertDataIntoTable(data) {
         VALUES ($1, $2, $3, $4, $5, $6)
       `;
       const values = [
-        `${item.player.first_name} ${item.player.last_name}`,
-        item.pts || 0,
-        item.ast || 0,
-        item.reb || 0,
-        item.stl || 0,
-        item.blk || 0,
+        `${item.player_name}`,
+        item.PTS || 0,
+        item.AST || 0,
+        item.TRB || 0,
+        item.STL || 0,
+        item.BLK || 0,
       ];
 
       await client.query(query, values);
@@ -40,15 +40,15 @@ async function insertDataIntoTable(data) {
 
 async function fetchDataFromAPI() {
   try {
-    const response = await fetch('https://www.balldontlie.io/api/v1/stats');
+    const response = await fetch('https://nba-stats-db.herokuapp.com/api/playerdata/season/2023');
     const data = await response.json();
 
-    if (!data || !Array.isArray(data.data)) {
+    if (!data || !Array.isArray(data.results)) {
       console.error('Invalid API response format:', data);
       return;
     }
 
-    await insertDataIntoTable(data.data);
+    await insertDataIntoTable(data.results);
 
     console.log('Data inserted successfully.');
   } catch (error) {

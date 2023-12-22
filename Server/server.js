@@ -18,7 +18,6 @@ app.use(express.static(path.resolve(__dirname, '../src')));
 
 app.use('/api', apiRouter);
 
-// Example: Fetch data from API and insert it into the PostgreSQL database
 app.get('/fetchAndInsertData', async (req, res) => {
   try {
     await fetchDataFromAPI();
